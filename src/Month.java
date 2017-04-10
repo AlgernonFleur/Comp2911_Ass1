@@ -13,11 +13,8 @@ public enum Month {
 	}
 	
 	public static void main(String[] args) {
-		String m = "Jan";
-		Month month = Month.valueOf(m);
-		System.out.println(month.getValue());
-		System.out.println(month.name());
-		System.out.println(month.toString());
-		System.out.println(month.ordinal());
+		for(Month m1:Month.values()){
+			System.out.println(m1.getValue()+"\t"+m1.toString());
+		}
 	}
 }
