@@ -6,9 +6,11 @@ import java.util.Scanner;
 public class VanRentalSystem {
 	
 	private ArrayList<Depot> depotsList;
+	private ArrayList<Request> requestsList;
 	
 	public VanRentalSystem() {
 		this.depotsList = new ArrayList<>();
+		this.requestsList = new ArrayList<>();
 	}
 	
 	public void parseInput(String input){
@@ -75,7 +77,7 @@ public class VanRentalSystem {
 					Integer.parseInt(line[8]), Transmission.valueOf(line[9]),
 					Integer.parseInt(line[10]),Transmission.valueOf(line[11]));
 		}
-		System.out.println(request);
+		if(request.isValidity()) this.requestsList.add(request);
 	}
 	
 	private void parseChange(String[] line) {
@@ -99,8 +101,5 @@ public class VanRentalSystem {
 	public static void main(String[] args) {
 		VanRentalSystem vrs = new VanRentalSystem();
 		vrs.parseInput(args[0]);
-		for(Depot d:vrs.depotsList){
-			System.out.println(d);
-		}
 	}
 }
