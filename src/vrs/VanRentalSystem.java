@@ -2,9 +2,17 @@ package vrs;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.function.Predicate;
 
 public class VanRentalSystem {
+	
+	private ArrayList<Depot> depotsList;
+	
+	public VanRentalSystem() {
+		this.depotsList = new ArrayList<>();
+	}
 	
 	public void parseInput(String input){
 		Scanner scanner = null;
@@ -28,9 +36,24 @@ public class VanRentalSystem {
 	}
 	
 	private void parseLocation(String[] line) {
-		String depot = line[1];
-		String name = line[2];
-		Transmission trans = Transmission.valueOf(line[3]);
+		String depotName = line[1];
+		String vanName = line[2];
+		Transmission transmission = Transmission.valueOf(line[3]);
+		
+		boolean depotNotInList = true;
+		for(Depot d:this.depotsList) {
+			if (d.getDepotName().equals(depotName)) {
+				d.addVan(new Van(depotName,vanName,transmission));
+				depotNotInList = false;
+			}
+			if(!depotNotInList) break;
+		}
+		if(depotNotInList){
+			Depot depot = new Depot(depotName);
+			depot.addVan(new Van(depotName,vanName,transmission));
+			this.depotsList.add(depot);
+		}
+		
 	}
 	
 	private void parseRequest(String[] line) {
