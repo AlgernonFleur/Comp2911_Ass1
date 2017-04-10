@@ -11,10 +11,4 @@ public enum Month {
 	public int getValue() {
 		return value;
 	}
-	
-	public static void main(String[] args) {
-		for(Month m1:Month.values()){
-			System.out.println(m1.getValue()+"\t"+m1.toString());
-		}
-	}
 }
