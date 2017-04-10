@@ -1,3 +1,5 @@
+package vrs;
+
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +42,7 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	@Override
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH MMM dd");
-		return "TimeInterval{" +
+		return "vrs.TimeInterval{" +
 				"start=" + start.format(formatter) +
 				", end=" + end.format(formatter) +
 				'}';
