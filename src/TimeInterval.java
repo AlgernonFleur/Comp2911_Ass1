@@ -72,6 +72,7 @@ public class TimeInterval implements Comparable<TimeInterval>{
 		System.out.println(ti3);
 		
 		System.out.println(ti1.isIntervalOverlapping(ti2));
+		System.out.println(ti1.isIntervalOverlapping(ti3));
 		
 	}
 }
