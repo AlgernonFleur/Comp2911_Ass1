@@ -1,5 +1,3 @@
-package vrs;
-
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
@@ -8,17 +6,10 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	private LocalDateTime start;
 	private LocalDateTime end;
 	
-	public TimeInterval(String[] s){
-		this.start = setTime(s[2],s[3],s[4]);
-		this.end = setTime(s[5],s[6],s[7]);
-	}
-	
-	private LocalDateTime setTime(String hour, String month, String day){
-		return LocalDateTime.of(2017,
-				Month.valueOf(month).getValue(),
-				Integer.parseInt(day),
-				Integer.parseInt(hour),
-				0,0,0);
+	public TimeInterval(int hour1, Month month1, int day1,
+						int hour2, Month month2, int day2){
+		this.start = LocalDateTime.of(2017,month1.val(),day1,hour1,0);
+		this.end = LocalDateTime.of(2017,month2.val(),day2,hour2,0);
 	}
 	
 	public LocalDateTime getStart() {
@@ -42,7 +33,7 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	@Override
 	public String toString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH MMM dd");
-		return "vrs.TimeInterval{" +
+		return "TimeInterval{" +
 				"start=" + start.format(formatter) +
 				", end=" + end.format(formatter) +
 				'}';

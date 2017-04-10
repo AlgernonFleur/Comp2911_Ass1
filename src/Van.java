@@ -1,5 +1,3 @@
-package vrs;
-
 import java.util.ArrayList;
 
 public class Van {

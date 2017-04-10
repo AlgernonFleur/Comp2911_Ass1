@@ -1,10 +1,7 @@
-package vrs;
-
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.function.Predicate;
 
 public class VanRentalSystem {
 	
@@ -81,5 +78,8 @@ public class VanRentalSystem {
 	public static void main(String[] args) {
 		VanRentalSystem vrs = new VanRentalSystem();
 		vrs.parseInput(args[0]);
+		for(Depot d:vrs.depotsList){
+			System.out.println(d);
+		}
 	}
 }
