@@ -2,9 +2,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-/**
- * Created by Algernon on 9/04/2017.
- */
 public class TimeInterval implements Comparable<TimeInterval>{
 	private LocalDateTime start;
 	private LocalDateTime end;
@@ -53,26 +50,5 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	public int compareTo(TimeInterval o) {
 		return Integer.compare(	(int)this.start.toEpochSecond(ZoneOffset.UTC),
 								(int)o.start.toEpochSecond(ZoneOffset.UTC));
-	}
-	
-	public static void main(String[] args) {
-		String test1 = "Request 1 10 Mar 3 20 Mar 3 3 Automatic";
-		String[] split1 = test1.split(" ");
-		TimeInterval ti1 = new TimeInterval(split1);
-		System.out.println(ti1);
-		
-		String test2 = "Request 1 1 Apr 3 20 Apr 3 3 Automatic";
-		String[] split2 = test2.split(" ");
-		TimeInterval ti2 = new TimeInterval(split2);
-		System.out.println(ti2);
-		
-		String test3 = "Request 1 20 Mar 3 20 Apr 3 3 Automatic";
-		String[] split3 = test3.split(" ");
-		TimeInterval ti3 = new TimeInterval(split3);
-		System.out.println(ti3);
-		
-		System.out.println(ti1.isIntervalOverlapping(ti2));
-		System.out.println(ti1.isIntervalOverlapping(ti3));
-		
 	}
 }
