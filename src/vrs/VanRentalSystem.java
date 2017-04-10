@@ -13,48 +13,50 @@ public class VanRentalSystem {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} finally {
-			parseScannedFile(scanner);
+			while(scanner.hasNext()){
+				String[] line = cleanLine(scanner.nextLine());
+				switch (line[0]){
+					case("Location"):	parseLocation(line);break;
+					case("Request"):	parseRequest(line);	break;
+					case("Change"):		parseChange(line);	break;
+					case("Cancel"):		parseCancel(line);	break;
+					case("Print"):		parsePrint(line);	break;
+				}
+			}
 			if(scanner!=null) scanner.close();
 		}
 	}
 	
-	private void parseScannedFile(Scanner scanner){
-		while(scanner.hasNext()){
-			String[] line = cleanLine(scanner.nextLine());
-			switch (line[0]){
-				case("Location"):	parseLocation(line);break;
-				case("Request"):	parseRequest(line);	break;
-				case("Change"):		parseChange(line);	break;
-				case("Cancel"):		parseCancel(line);	break;
-				case("Print"):		parsePrint(line);	break;
-			}
-		}
-	}
-	
 	private void parseLocation(String[] line) {
+		String depot = line[1];
+		String name = line[2];
+		Transmission trans = Transmission.valueOf(line[3]);
 	}
 	
 	private void parseRequest(String[] line) {
+		System.out.println("\t#TODO:\t"+String.join(" ",line));
 	}
 	
 	private void parseChange(String[] line) {
+		System.out.println("\t#TODO:\t"+String.join(" ",line));
 	}
 	
 	private void parseCancel(String[] line) {
+		System.out.println("\t#TODO:\t"+String.join(" ",line));
 	}
 	
 	private void parsePrint(String[] line) {
+		System.out.println("\t#TODO:\t"+String.join(" ",line));
 	}
 	
-	
 	private String[] cleanLine(String input){
-		String trimmedLine[] = input.trim().split("\\s+");
-		String uncommentLine[] = String.join(" ",trimmedLine).split("#");
-		return uncommentLine[0].split("\\s+");
+		String trim[] = input.trim().split("\\s+");
+		String uncomment[] = String.join(" ",trim).split("#");
+		return uncomment[0].split("\\s+");
 	}
 	
 	public static void main(String[] args) {
 		VanRentalSystem vrs = new VanRentalSystem();
-		
+		vrs.parseInput(args[0]);
 	}
 }
