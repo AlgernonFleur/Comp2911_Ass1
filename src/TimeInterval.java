@@ -31,12 +31,20 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	
 	public boolean isIntervalOverlapping(TimeInterval tI){
 		if(		tI.start.isAfter(this.start) &&
-				tI.start.isBefore(this.end)) return true;	//start is in the middle
+				tI.start.isBefore(this.end.plusHours(1))) return true;
 		else if(tI.end.isAfter(this.start) &&
-				tI.end.isBefore(this.end)) return true;		//end is in the middle
+				tI.end.isBefore(this.end.plusHours(1))) return true;
 		else if(tI.start.isBefore(this.start) &&
-				tI.end.isAfter(this.end)) return true;		//this is in the middle
+				tI.end.isAfter(this.end.plusHours(1))) return true;
 		else return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "TimeInterval{" +
+				"start=" + start +
+				", end=" + end +
+				'}';
 	}
 	
 	@Override
@@ -46,10 +54,22 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	}
 	
 	public static void main(String[] args) {
-		String testLine = "Request 1 10 Mar 3 20 Mar 3 3 Automatic";
-		String[] split = testLine.split(" ");
-		TimeInterval ti = new TimeInterval(split);
-		System.out.println(ti.start);
-		System.out.println(ti.end);
+		String test1 = "Request 1 10 Mar 3 20 Mar 3 3 Automatic";
+		String[] split1 = test1.split(" ");
+		TimeInterval ti1 = new TimeInterval(split1);
+		System.out.println(ti1);
+		
+		String test2 = "Request 1 1 Apr 3 20 Apr 3 3 Automatic";
+		String[] split2 = test2.split(" ");
+		TimeInterval ti2 = new TimeInterval(split2);
+		System.out.println(ti2);
+		
+		String test3 = "Request 1 20 Mar 3 20 Apr 3 3 Automatic";
+		String[] split3 = test3.split(" ");
+		TimeInterval ti3 = new TimeInterval(split3);
+		System.out.println(ti3);
+		
+		System.out.println(ti1.isIntervalOverlapping(ti2));
+		
 	}
 }
