@@ -54,7 +54,28 @@ public class VanRentalSystem {
 	}
 	
 	private void parseRequest(String[] line) {
-		System.out.println("\t#TODO:\t"+String.join(" ",line));
+		int hour1 = 	Integer.parseInt(line[2]);
+		Month month1 = 	Month.valueOf(line[3]);
+		int day1 = 		Integer.parseInt(line[4]);
+		
+		int hour2 = 	Integer.parseInt(line[5]);
+		Month month2 = 	Month.valueOf(line[6]);
+		int day2 = 		Integer.parseInt(line[7]);
+		
+		TimeInterval time = new TimeInterval(hour1,month1,day1,hour2,month2,day2);
+		
+		int requestID = Integer.parseInt(line[1]);
+		Request request = null;
+		
+		if(line.length==10){
+			request = new Request(this.depotsList,requestID,time,
+					Integer.parseInt(line[8]), Transmission.valueOf(line[9]));
+		}else if(line.length==12){
+			request = new Request(this.depotsList,requestID,time,
+					Integer.parseInt(line[8]), Transmission.valueOf(line[9]),
+					Integer.parseInt(line[10]),Transmission.valueOf(line[11]));
+		}
+		System.out.println(request);
 	}
 	
 	private void parseChange(String[] line) {
