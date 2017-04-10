@@ -1,16 +1,13 @@
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 
-/**
- * Created by Algernon on 9/04/2017.
- */
 public class TimeInterval implements Comparable<TimeInterval>{
-	private LocalDateTime start;
-	private LocalDateTime end;
+	private Time start;
+	private Time end;
 	
 	public TimeInterval(String[] s){
-		this.start = setTime(s[2],s[3],s[4]);
-		this.end = setTime(s[5],s[6],s[7]);
+		this.start = new Time(setTime(s[2],s[3],s[4]));
+		this.end = new Time(setTime(s[5],s[6],s[7]));
 	}
 	
 	private LocalDateTime setTime(String hour, String month, String day){
@@ -21,21 +18,24 @@ public class TimeInterval implements Comparable<TimeInterval>{
 				0,0,0);
 	}
 	
-	public LocalDateTime getStart() {
+	public Time getStart() {
 		return start;
 	}
 	
-	public LocalDateTime getEnd() {
+	public Time getEnd() {
 		return end;
 	}
 	
 	public boolean isIntervalOverlapping(TimeInterval tI){
-		if(		tI.start.isAfter(this.start) &&
-				tI.start.isBefore(this.end.plusHours(1))) return true;
-		else if(tI.end.isAfter(this.start) &&
-				tI.end.isBefore(this.end.plusHours(1))) return true;
-		else if(tI.start.isBefore(this.start) &&
-				tI.end.isAfter(this.end.plusHours(1))) return true;
+		if(		tI.start.getTime().isAfter(this.start.getTime()) &&
+				tI.start.getTime().isBefore(this.end.getTime().plusHours(1)))
+			return true;
+		else if(tI.end.getTime().isAfter(this.start.getTime()) &&
+				tI.end.getTime().isBefore(this.end.getTime().plusHours(1)))
+			return true;
+		else if(tI.start.getTime().isBefore(this.start.getTime()) &&
+				tI.end.getTime().isAfter(this.end.getTime().plusHours(1)))
+			return true;
 		else return false;
 	}
 	
@@ -49,8 +49,8 @@ public class TimeInterval implements Comparable<TimeInterval>{
 	
 	@Override
 	public int compareTo(TimeInterval o) {
-		return Integer.compare(	(int)this.start.toEpochSecond(ZoneOffset.UTC),
-								(int)o.start.toEpochSecond(ZoneOffset.UTC));
+		return Integer.compare(	(int)this.start.getTime().toEpochSecond(ZoneOffset.UTC),
+								(int)o.start.getTime().toEpochSecond(ZoneOffset.UTC));
 	}
 	
 	public static void main(String[] args) {

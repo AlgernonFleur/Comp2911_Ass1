@@ -14,7 +14,7 @@ public class Time {
 	
 	@Override
 	public String toString() {
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH MMM DD");
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH MMM dd");
 		return this.localDateTime.format(formatter);
 	}
 }
